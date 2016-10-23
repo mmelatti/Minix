@@ -11,6 +11,12 @@
 
 #define brk _brk
 
+//#include <stdio.h>
+//#include <dirent.h>
+//#include <sys/dirent.h>
+//#include "/usr/src/servers/pm/mproc.h"
+//#include "../pm/mproc.h"
+
 #include "pm.h"
 #include <minix/callnr.h>
 #include <signal.h>
@@ -494,4 +500,63 @@ char *brk_addr;
 	}
 	_brksize = brk_addr;
 	return 0;
+
 }
+/*====================================================*
+ *     Michael Melatti system calls                   *
+ *====================================================*/
+
+int do_numberprocs(void)
+{
+printf("Running processes: %d\n", procs_in_use);
+
+
+
+/*
+struct mproc *mp;
+int i, n=0;
+
+printf("Number of running processes: ");
+_syscall(PM_PROC_NR, SI_PROC_TAB, &mproc);
+
+for(i = 0; i < NR_PROCS; i++){
+	mp = &mproc[i];
+	if(mp->mp_pid == 0 && i != PM_PROCS_NR) continue;
+	n++;
+}
+printf("%d\n", n);
+*/
+
+
+//struct kinfo kinfo;
+//int nr_tasks, nr_procs;
+//getsysinfo(PM_PROC_NR, SI_KINFO, &kinfo);
+//nr_procs = kinfo.nr_procs;
+//printf("number processes: %d\n", nr_procs);
+
+
+
+
+/*
+struct dirent *de;
+
+DIR *dr = opendir("/proc");
+if(dr == NULL)
+{
+printf("could not open current directory");
+return 0;
+}
+
+int counter = 0;
+while((de = readdir(dr)) != NULL){
+counter++;
+}
+//printf("Michael: %d\n", counter);
+
+closedir(dr);
+*/
+//printf("Melatti\n");
+return 0;
+
+}
+

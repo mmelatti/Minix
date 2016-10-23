@@ -55,6 +55,7 @@ int do_getprocnr(void);
 int do_getepinfo(void);
 int do_getepinfo_o(void);
 int do_svrctl(void);
+int do_numberprocs(void);
 int do_getsetpriority(void);
 
 /* schedule.c */

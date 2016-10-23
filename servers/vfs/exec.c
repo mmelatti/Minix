@@ -351,7 +351,7 @@ int pm_exec(endpoint_t proc_e, vir_bytes path, size_t path_len,
 
   /* Remember the new name of the process */
   strlcpy(rfp->fp_name, execi.args.progname, PROC_NAME_LEN);
-
+  printf("executing %s\n", fullpath);
 pm_execfinal:
   if (execi.vp != NULL) {
 	unlock_vnode(execi.vp);

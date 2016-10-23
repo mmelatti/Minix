@@ -1,4 +1,5 @@
-/* This file contains the table used to map system call numbers onto the
+/*
+ This file contains the table used to map system call numbers onto the
  * routines that perform them.
  */
 
@@ -80,7 +81,7 @@ int (*call_vec[])(void) = {
 	do_set, 	/* 66 = setgroups */
 	do_getmcontext,	/* 67 = getmcontext */
 	do_setmcontext,	/* 68 = setmcontext */
-	no_sys,		/* 69 = unused	*/
+	do_numberprocs,	/* 69 = number procs */
 	no_sys,		/* 70 = unused	*/
 	do_sigaction,	/* 71 = sigaction   */
 	do_sigsuspend,	/* 72 = sigsuspend  */
