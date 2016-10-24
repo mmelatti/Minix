@@ -520,7 +520,7 @@ int do_sema_init(int semaphore_number, int start_value)
 
 int do_sema_down(int semaphore_number)
 {
-  printf("running semaphore down\n", );
+  printf("running semaphore down\n");
   return 0;
 }
 
