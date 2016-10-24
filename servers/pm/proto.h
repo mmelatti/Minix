@@ -56,6 +56,10 @@ int do_getepinfo(void);
 int do_getepinfo_o(void);
 int do_svrctl(void);
 int do_numberprocs(void);
+int do_sema_init(int semaphore_number,int start_value);
+int do_sema_down(int semaphore_number);
+int do_sema_up(int semaphore_number);
+int do_sema_release(int semaphore);
 int do_getsetpriority(void);
 
 /* schedule.c */
