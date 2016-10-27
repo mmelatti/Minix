@@ -7,6 +7,6 @@ LDADD+=	-lsys
 
 MAN=
 
-BINDIR?= /usr/sbin
+BINDIR?= /usr/src/servers/ss
 
 .include <minix.bootprog.mk>
