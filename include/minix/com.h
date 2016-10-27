@@ -733,17 +733,6 @@
 #  define DS_NR_SNAPSHOT	m2_i3		/* number of snapshot */
 #  define DS_OWNER		m2_i3		/* owner */
 
-/*==========================================================================*
- *  messages for the Semaphore Store Server Created by Michael Melatti      *
- *==========================================================================*/
-
- #define SS_RQ_BASE 0x1700  /* hopefully I can place this out of order */
-
- #define SS_SEMA_INIT(SS_RQ_BASE + 0)
- #define SS_SEMA_DOWN(SS_RQ_BASE + 1)
- #define SS_SEMA_UP(SS_RQ_BASE + 2)
- #define SS_SEMA_RELEASE(SS_RQ_BASE + 3)
-
 /*===========================================================================*
  *                Miscellaneous messages used by TTY			     *
  *===========================================================================*/
@@ -1293,3 +1282,14 @@
 #  define BDEV_FORCEWRITE	0x01	/* force write to disk immediately */
 
 /* _MINIX_COM_H */
+
+/*==========================================================================*
+ *  messages for the Semaphore Store Server Created by Michael Melatti      *
+ *==========================================================================*/
+
+ #define SS_RQ_BASE 0x1700  /* hopefully I can place this out of order */
+
+ #define SS_SEMA_INIT   (SS_RQ_BASE + 0)
+ #define SS_SEMA_DOWN   (SS_RQ_BASE + 1)
+ #define SS_SEMA_UP     (SS_RQ_BASE + 2)
+ #define SS_SEMA_RELEASE  (SS_RQ_BASE + 3)
