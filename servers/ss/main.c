@@ -63,10 +63,10 @@ int main(int argc, char **argv)
 	  break;
     */
 
-      case SEMA_INIT        /*Michael don't know which one will work*/
+      case SEMA_INIT:        /*Michael don't know which one will work*/
     result = do_SS_INIT(&m);
     break;
-      case SS_SEMA_INIT
+      case SS_SEMA_INIT:
     result = do_SS_INIT(&m);
     break;
       default:
