@@ -742,7 +742,7 @@
  #define SS_SEMA_INIT(SS_RQ_BASE + 0)
  #define SS_SEMA_DOWN(SS_RQ_BASE + 1)
  #define SS_SEMA_UP(SS_RQ_BASE + 2)
- #define SS_SEMA_RELSEASE(SS_RQ_BASE + 3)
+ #define SS_SEMA_RELEASE(SS_RQ_BASE + 3)
 
 /*===========================================================================*
  *                Miscellaneous messages used by TTY			     *

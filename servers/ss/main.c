@@ -57,29 +57,17 @@ int main(int argc, char **argv)
       }
 
       switch (callnr) {
-      case DS_PUBLISH:
-          result = do_publish(&m);
-          break;
-      case DS_RETRIEVE:
-	  result = do_retrieve(&m);
-	  break;
-      case DS_RETRIEVE_LABEL:
-	  result = do_retrieve_label(&m);
-	  break;
-      case DS_DELETE:
-	  result = do_delete(&m);
-	  break;
-      case DS_SUBSCRIBE:
-	  result = do_subscribe(&m);
-	  break;
+    /*
       case DS_CHECK:
 	  result = do_check(&m);
 	  break;
-      case COMMON_GETSYSINFO:
-	  result = do_getsysinfo(&m);
-	  break;
-      case SEMA_INIT
+    */
+
+      case SEMA_INIT        /*Michael don't know which one will work*/
     result = do_SS_INIT(&m);
+    break;
+      case SS_SEMA_INIT
+    result = do_ss_INIT(&m);
     break;
       default:
           printf("DS: warning, got illegal request from %d\n", m.m_source);
