@@ -21,18 +21,19 @@
  *    0xE00 -  0xEFF	Common system messages (e.g. system signals)
  *    0xF00 -  0xFFF    Scheduling messages
  *   0x1000 - 0x10FF	Notify messages
- *   0x1100 - 0x11FF	USB  
+ *   0x1100 - 0x11FF	USB
  *   0x1200 - 0x12FF    Devman
  *   0x1300 - 0x13FF    TTY Input
  *   0x1400 - 0x14FF	VFS-FS transaction IDs
  *   0x1500 - 0x15FF	Block device requests and responses
  *   0x1600 - 0x16FF	VirtualBox (VBOX) requests (see vboxif.h)
+ *   0x1700 - 0x17FF  Semaphore Server Store for messages by Michael Melatti
  *
  * Zero and negative values are widely used for OK and error responses.
  */
 
 #ifndef _MINIX_COM_H
-#define _MINIX_COM_H 
+#define _MINIX_COM_H
 
 /*===========================================================================*
  *          	    		Magic process numbers			     *
@@ -42,7 +43,7 @@
 #define ANY	((endpoint_t) 0x7ace)	/* used to indicate 'any process' */
 #define NONE 	((endpoint_t) 0x6ace)   /* used to indicate 'no process at all' */
 #define SELF	((endpoint_t) 0x8ace) 	/* used to indicate 'own process' */
-#define _MAX_MAGIC_PROC (SELF)	/* used by <minix/endpoint.h> 
+#define _MAX_MAGIC_PROC (SELF)	/* used by <minix/endpoint.h>
 				   to determine generation size */
 
 /*===========================================================================*
@@ -53,7 +54,7 @@
  * are enabled. They are defined as (PREVIOUS_TASK - ENABLE_TASK) in general.
  * ENABLE_TASK is either 0 or 1, so a task either gets a new number, or gets
  * the same number as the previous task and is further unused. Note that the
- * order should correspond to the order in the task table defined in table.c. 
+ * order should correspond to the order in the task table defined in table.c.
  */
 
 /* Kernel tasks. These all run in the same address space. */
@@ -66,7 +67,7 @@
 
 /* Number of tasks. Note that NR_PROCS is defined in <minix/config.h>. */
 #define MAX_NR_TASKS	1023
-#define NR_TASKS	  5 
+#define NR_TASKS	  5
 
 /* User-space processes, that is, device drivers, servers, and INIT. */
 #define PM_PROC_NR   ((endpoint_t) 0)	/* process manager */
@@ -98,7 +99,7 @@
  * so make sure that these types do not interfere with other message types.
  * Notifications are prioritized because of the way they are unhold() and
  * blocking notifications are delivered. The lowest numbers go first. The
- * offset are used for the per-process notification bit maps. 
+ * offset are used for the per-process notification bit maps.
  */
 #define NOTIFY_MESSAGE		  0x1000
 /* FIXME the old is_notify(a) should be replaced by is_ipc_notify(status). */
@@ -166,7 +167,7 @@
 							 * driver (safecopy)
 							 */
 #define BUSC_PCI_DEL_ACL	(BUSC_RQ_BASE + 18)	/* Delete the ACL of a
-							 * driver 
+							 * driver
 							 */
 #define BUSC_PCI_GET_BAR	(BUSC_RQ_BASE + 19)	/* Get Base Address
 							 * Register properties
@@ -242,15 +243,15 @@
 #define TTY_LINE	DEVICE	/* message parameter: terminal line */
 #define TTY_REQUEST	COUNT	/* message parameter: ioctl request code */
 #define TTY_SPEK	POSITION/* message parameter: ioctl speed, erasing */
-#define TTY_PGRP 	m2_i3	/* message parameter: process group */	
+#define TTY_PGRP 	m2_i3	/* message parameter: process group */
 
 /*===========================================================================*
  *                  	   Messages for networking layer		     *
  *===========================================================================*/
 
 /* Base type for data link layer requests and responses. */
-#define DL_RQ_BASE	0x200		
-#define DL_RS_BASE	0x280		
+#define DL_RQ_BASE	0x200
+#define DL_RS_BASE	0x280
 
 /* Message types for data link layer requests. */
 #define DL_CONF		(DL_RQ_BASE + 0)
@@ -286,11 +287,11 @@
  *                  SYSTASK request types and field names                    *
  *===========================================================================*/
 
-/* System library calls are dispatched via a call vector, so be careful when 
+/* System library calls are dispatched via a call vector, so be careful when
  * modifying the system call numbers. The numbers here determine which call
  * is made from the call vector.
- */ 
-#define KERNEL_CALL	0x600	/* base for kernel calls to SYSTEM */ 
+ */
+#define KERNEL_CALL	0x600	/* base for kernel calls to SYSTEM */
 
 #  define SYS_FORK       (KERNEL_CALL + 0)	/* sys_fork() */
 #  define SYS_EXEC       (KERNEL_CALL + 1)	/* sys_exec() */
@@ -330,7 +331,7 @@
 #  define SYS_SETGRANT   (KERNEL_CALL + 34)	/* sys_setgrant() */
 #  define SYS_READBIOS   (KERNEL_CALL + 35)	/* sys_readbios() */
 
-#  define SYS_SPROF      (KERNEL_CALL + 36)     /* sys_sprof() */ 
+#  define SYS_SPROF      (KERNEL_CALL + 36)     /* sys_sprof() */
 #  define SYS_CPROF      (KERNEL_CALL + 37)     /* sys_cprof() */
 #  define SYS_PROFBUF    (KERNEL_CALL + 38)     /* sys_profbuf() */
 
@@ -413,7 +414,7 @@
 #define IRQ_VECTOR	m5_s2   /* irq vector */
 #define IRQ_POLICY	m5_i1   /* options for IRQCTL request */
 #  define IRQ_REENABLE  0x001	/* reenable IRQ line after interrupt */
-#  define IRQ_BYTE      0x100	/* byte values */      
+#  define IRQ_BYTE      0x100	/* byte values */
 #  define IRQ_WORD      0x200	/* word values */
 #  define IRQ_LONG      0x400	/* long values */
 #define IRQ_HOOK_ID	m5_l3   /* id of irq hook at kernel */
@@ -473,9 +474,9 @@
 #   define GET_CPUINFO    23    /* get information about cpus */
 #   define GET_REGS	  24	/* get general process registers */
 #define I_ENDPT        m7_i4	/* calling process (may only be SELF) */
-#define I_VAL_PTR      m7_p1	/* virtual address at caller */ 
+#define I_VAL_PTR      m7_p1	/* virtual address at caller */
 #define I_VAL_LEN      m7_i1	/* max length of value */
-#define I_VAL_PTR2     m7_p2	/* second virtual address */ 
+#define I_VAL_PTR2     m7_p2	/* second virtual address */
 #define I_VAL_LEN2_E   m7_i2	/* second length, or proc nr */
 
 /* GET_WHOAMI fields. */
@@ -573,7 +574,7 @@
 
 /* Field names for SYS_SPROF, _CPROF, _PROFBUF. */
 #define PROF_ACTION    m7_i1    /* start/stop/reset/get */
-#define PROF_MEM_SIZE  m7_i2    /* available memory for data */ 
+#define PROF_MEM_SIZE  m7_i2    /* available memory for data */
 #define PROF_FREQ      m7_i3    /* sample frequency */
 #define PROF_ENDPT     m7_i4    /* endpoint of caller */
 #define PROF_INTR_TYPE m7_i5    /* interrupt type */
@@ -660,9 +661,9 @@
 
 /* Subfunctions for SYS_SCHEDCTL */
 #define SCHEDCTL_FLAGS		m9_l1	/* flags for setting the scheduler */
-#  define SCHEDCTL_FLAG_KERNEL	1	/* mark kernel scheduler and remove 
-					 * RTS_NO_QUANTUM; otherwise caller is 
-					 * marked scheduler 
+#  define SCHEDCTL_FLAG_KERNEL	1	/* mark kernel scheduler and remove
+					 * RTS_NO_QUANTUM; otherwise caller is
+					 * marked scheduler
 					 */
 #define SCHEDCTL_ENDPOINT	m9_l2	/* endpt of process to be scheduled */
 #define SCHEDCTL_QUANTUM	m9_l3   /* current scheduling quantum */
@@ -731,6 +732,17 @@
 #  define DS_VAL_LEN		m2_l2		/* data length */
 #  define DS_NR_SNAPSHOT	m2_i3		/* number of snapshot */
 #  define DS_OWNER		m2_i3		/* owner */
+
+/*==========================================================================*
+ *  messages for the Semaphore Store Server Created by Michael Melatti      *
+ *==========================================================================*/
+
+ #define SS_RQ_BASE 0x1700  /* hopefully I can place this out of order */
+
+ #define SS_SEMA_INIT(SS_RQ_BASE + 0)
+ #define SS_SEMA_DOWN(SS_RQ_BASE + 1)
+ #define SS_SEMA_UP(SS_RQ_BASE + 2)
+ #define SS_SEMA_RELSEASE(SS_RQ_BASE + 3)
 
 /*===========================================================================*
  *                Miscellaneous messages used by TTY			     *
@@ -830,10 +842,10 @@
 					 * text segment is already present)
 					 */
 #define EXC_NM_RF_ALLOW_SETUID	2	/* Setuid execution is allowed (tells
-					 * FS to update its uid and gid 
+					 * FS to update its uid and gid
 					 * fields.
 					 */
-#define EXC_NM_RF_FULLVM	4	
+#define EXC_NM_RF_FULLVM	4
 
 /* Parameters for the EXEC_RESTART call */
 #define EXC_RS_PROC	m1_i1		/* process that needs to be restarted */
@@ -1174,7 +1186,7 @@
 #define USB_RQ_DEINIT        (USB_BASE +  1) /* Quit the session */
 #define USB_RQ_SEND_URB      (USB_BASE +  2) /* Send URB */
 #define USB_RQ_CANCEL_URB    (USB_BASE +  3) /* Cancel URB */
-#define USB_REPLY            (USB_BASE +  4) 
+#define USB_REPLY            (USB_BASE +  4)
 
 
 /* those are from USBD to driver */

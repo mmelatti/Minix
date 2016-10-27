@@ -1,9 +1,9 @@
-/* Data Store Server. 
- * This service implements a little publish/subscribe data store that is 
+/* Data Store Server.
+ * This service implements a little publish/subscribe data store that is
  * crucial for the system's fault tolerance. Components that require state
  * can store it here, for later retrieval, e.g., after a crash and subsequent
- * restart by the reincarnation server. 
- * 
+ * restart by the reincarnation server.
+ *
  * Created:
  *   Oct 19, 2005	by Jorrit N. Herder
  */
@@ -22,24 +22,30 @@ static void reply(endpoint_t whom, message *m_ptr);
 /* SEF functions and variables. */
 static void sef_local_startup(void);
 
+int do_SS_INIT(message *m_ptr)
+{
+  printf("Michael's Server\n");
+  return 0;
+}
+
 /*===========================================================================*
  *				main                                         *
  *===========================================================================*/
 int main(int argc, char **argv)
 {
-/* This is the main routine of this service. The main loop consists of 
+/* This is the main routine of this service. The main loop consists of
  * three major activities: getting new work, processing the work, and
  * sending the reply. The loop never terminates, unless a panic occurs.
  */
   message m;
-  int result;                 
+  int result;
 
   /* SEF local startup. */
   env_setargs(argc, argv);
   sef_local_startup();
 
-  /* Main loop - get work and do it, forever. */         
-  while (TRUE) {              
+  /* Main loop - get work and do it, forever. */
+  while (TRUE) {
 
       /* Wait for incoming message, sets 'callnr' and 'who'. */
       get_work(&m);
@@ -72,7 +78,10 @@ int main(int argc, char **argv)
       case COMMON_GETSYSINFO:
 	  result = do_getsysinfo(&m);
 	  break;
-      default: 
+      case SEMA_INIT
+    result = do_SS_INIT(&m);
+    break;
+      default:
           printf("DS: warning, got illegal request from %d\n", m.m_source);
           result = EINVAL;
       }
@@ -128,4 +137,3 @@ static void reply(
     if (OK != s)
         printf("DS: unable to send reply to %d: %d\n", who_e, s);
 }
-

@@ -1,5 +1,5 @@
 # Makefile for Data Store Server (DS)
-PROG=	ds
+PROG=	ss
 SRCS=	main.c store.c
 
 DPADD+=	${LIBSYS}
