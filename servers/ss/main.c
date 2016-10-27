@@ -67,7 +67,7 @@ int main(int argc, char **argv)
     result = do_SS_INIT(&m);
     break;
       case SS_SEMA_INIT
-    result = do_ss_INIT(&m);
+    result = do_SS_INIT(&m);
     break;
       default:
           printf("DS: warning, got illegal request from %d\n", m.m_source);
