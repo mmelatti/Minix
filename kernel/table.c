@@ -50,8 +50,8 @@ struct boot_image image[NR_BOOT_PROCS] = {
 {SYSTEM,        "system"},
 {HARDWARE,      "kernel"},
 
-{SS_PROC_NR},   "ss"    }; /* Semaphore Service Created by Michael Melatti */
 {DS_PROC_NR,    "ds"    },
+{SS_PROC_NR},   "ss"    }, /* Semaphore Service Created by Michael Melatti */
 {RS_PROC_NR,    "rs"    },
 
 {PM_PROC_NR,    "pm"    },
