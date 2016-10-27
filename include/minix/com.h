@@ -722,6 +722,10 @@
 #define DS_DELETE	(DS_RQ_BASE + 4)	/* delete data */
 #define DS_SNAPSHOT	(DS_RQ_BASE + 5)	/* take a snapshot */
 #define DS_RETRIEVE_LABEL  (DS_RQ_BASE + 6)	/* retrieve label's name */
+#define SS_SEMA_INIT   (DS_RQ_BASE + 7)
+#define SS_SEMA_DOWN   (DS_RQ_BASE + 8)
+#define SS_SEMA_UP     (DS_RQ_BASE + 9)
+#define SS_SEMA_RELEASE  (DS_RQ_BASE + 10)
 
 /* DS field names */
 #  define DS_KEY_GRANT		m2_i1		/* key for the data */
@@ -733,6 +737,17 @@
 #  define DS_NR_SNAPSHOT	m2_i3		/* number of snapshot */
 #  define DS_OWNER		m2_i3		/* owner */
 
+/*==========================================================================*
+ *  messages for the Semaphore Store Server Created by Michael Melatti      *
+ *==========================================================================*/
+
+// #define SS_RQ_BASE 0x1700  /* hopefully I can place this out of order */
+/*
+ #define SS_SEMA_INIT   (SS_RQ_BASE + 0)
+ #define SS_SEMA_DOWN   (SS_RQ_BASE + 1)
+ #define SS_SEMA_UP     (SS_RQ_BASE + 2)
+ #define SS_SEMA_RELEASE  (SS_RQ_BASE + 3)
+*/
 /*===========================================================================*
  *                Miscellaneous messages used by TTY			     *
  *===========================================================================*/
@@ -1282,14 +1297,3 @@
 #  define BDEV_FORCEWRITE	0x01	/* force write to disk immediately */
 
 /* _MINIX_COM_H */
-
-/*==========================================================================*
- *  messages for the Semaphore Store Server Created by Michael Melatti      *
- *==========================================================================*/
-
- #define SS_RQ_BASE 0x1700  /* hopefully I can place this out of order */
-
- #define SS_SEMA_INIT   (SS_RQ_BASE + 0)
- #define SS_SEMA_DOWN   (SS_RQ_BASE + 1)
- #define SS_SEMA_UP     (SS_RQ_BASE + 2)
- #define SS_SEMA_RELEASE  (SS_RQ_BASE + 3)
