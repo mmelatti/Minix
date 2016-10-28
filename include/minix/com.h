@@ -724,10 +724,10 @@
 #define DS_SNAPSHOT	(DS_RQ_BASE + 5)	/* take a snapshot */
 #define DS_RETRIEVE_LABEL  (DS_RQ_BASE + 6)	/* retrieve label's name */
 
-#define SS_SEMA_INIT  (DS_REQ_BASE + 7) /* Michael Case switch*/
-#define SS_SEMA_UP    (DS_REQ_BASE + 8)
+#define SS_SEMA_INIT    (DS_REQ_BASE + 7) /* Michael Case switch*/
+#define SS_SEMA_UP      (DS_REQ_BASE + 8)
 #define SS_SEMA_DOWN    (DS_REQ_BASE + 9)
-#define SS_SEMA_RELEASE(DS_REQ_BASE + 10)
+//#define SS_SEMA_RELEASE (DS_REQ_BASE + 10)
 
 /* DS field names */
 #  define DS_KEY_GRANT		m2_i1		/* key for the data */
