@@ -26,25 +26,25 @@ static void sef_local_startup(void);
 /*==========================================================================*
 *         My semaphore functions                                            *
 *===========================================================================*/
-int do_sema_init(int semaphore_number, int start_value)
+int do_sema_init(message *m_ptr)
 {
   printf("Sema Init Hello From Server\n");
   return 0;
 }
 
-int do_sema_down(int semaphore_number)
+int do_sema_down(message *m_ptr)
 {
   printf("Sema Down Hello From Server\n");
   return 0;
 }
 
-int do_sema_up(int semaphore_number)
+int do_sema_up(message *m_ptr)
 {
   printf("Sema Up Hello From Server\n");
   return 0;
 }
 
-int do_sema_release(int semaphore)
+int do_sema_release(message *m_ptr)
 {
   printf("Seam Release Hello From Server\n");
   return 0;
