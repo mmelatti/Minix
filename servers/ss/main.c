@@ -26,25 +26,25 @@ static void sef_local_startup(void);
 /*==========================================================================*
 *         My semaphore functions                                            *
 *===========================================================================*/
-int do_sema_init()
+int do_sema_init(int semaphore_number, int start_value)
 {
   printf("Sema Init Hello From Server\n");
   return 0;
 }
 
-int do_sema_down()
+int do_sema_down(int semaphore_number)
 {
   printf("Sema Down Hello From Server\n");
   return 0;
 }
 
-int do_sema_up()
+int do_sema_up(int semaphore_number)
 {
   printf("Sema Up Hello From Server\n");
   return 0;
 }
 
-int do_sema_release()
+int do_sema_release(int semaphore)
 {
   printf("Seam Release Hello From Server\n");
   return 0;
@@ -101,8 +101,8 @@ int main(int argc, char **argv)
       case COMMON_GETSYSINFO:
 	  result = do_getsysinfo(&m);
 	  break;
-      case SEMA_INIT:
-    result = do_sema_init();
+      case SEMA_DOWN:
+    result = do_sema_down(&m);
     break;
       default:
           printf("DS: warning, got illegal request from %d\n", m.m_source);
