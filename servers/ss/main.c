@@ -101,7 +101,7 @@ int main(int argc, char **argv)
       case COMMON_GETSYSINFO:
 	  result = do_getsysinfo(&m);
 	  break;
-      case SEMA_INIT
+      case SEMA_INIT:
     result = do_sema_init(&m);
     break;
       default:
