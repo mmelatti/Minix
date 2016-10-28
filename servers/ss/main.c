@@ -101,6 +101,9 @@ int main(int argc, char **argv)
       case COMMON_GETSYSINFO:
 	  result = do_getsysinfo(&m);
 	  break;
+      case SEMA_INIT
+    result = do_sema_init(&m);
+    break;
       default:
           printf("DS: warning, got illegal request from %d\n", m.m_source);
           result = EINVAL;
