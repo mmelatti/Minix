@@ -1,4 +1,4 @@
-/* The object file of "table.c" contains most kernel data. Variables that 
+/* The object file of "table.c" contains most kernel data. Variables that
  * are declared in the *.h files appear with EXTERN in front of them, as in
  *
  *    EXTERN int x;
@@ -13,26 +13,27 @@
  * so they are declared extern when included normally.  However, it must be
  * declared for real somewhere.  That is done here, by redefining EXTERN as
  * the null string, so that inclusion of all *.h files in table.c actually
- * generates storage for them.  
+ * generates storage for them.
  *
  * Various variables could not be declared EXTERN, but are declared PUBLIC
- * or PRIVATE. The reason for this is that extern variables cannot have a  
+ * or PRIVATE. The reason for this is that extern variables cannot have a
  * default initialization. If such variables are shared, they must also be
- * declared in one of the *.h files without the initialization.  Examples 
- * include 'boot_image' (this file) and 'idt' and 'gdt' (protect.c). 
+ * declared in one of the *.h files without the initialization.  Examples
+ * include 'boot_image' (this file) and 'idt' and 'gdt' (protect.c).
  *
  * Changes:
  *    Nov 22, 2009   rewrite of privilege management (Cristiano Giuffrida)
  *    Aug 02, 2005   set privileges and minimal boot image (Jorrit N. Herder)
  *    Oct 17, 2004   updated above and tasktab comments  (Jorrit N. Herder)
  *    May 01, 2004   changed struct for system image  (Jorrit N. Herder)
+ *    Oct 30, 2016   added semaphore server           (Michael L. Melatti)
  */
 #define _TABLE
 
 #include "kernel/kernel.h"
 #include <minix/com.h>
 
-/* The system image table lists all programs that are part of the boot image. 
+/* The system image table lists all programs that are part of the boot image.
  * The order of the entries here MUST agree with the order of the programs
  * in the boot image and all kernel tasks must come first.
  * The order of the entries here matches the priority NOTIFY messages are
@@ -49,10 +50,11 @@ struct boot_image image[NR_BOOT_PROCS] = {
 {CLOCK,         "clock" },
 {SYSTEM,        "system"},
 {HARDWARE,      "kernel"},
-                      
+
 {DS_PROC_NR,    "ds"    },
+{SS_PROC_NR,    "ss"    }, /* Michael Melatti*/
 {RS_PROC_NR,    "rs"    },
-                      
+
 {PM_PROC_NR,    "pm"    },
 {SCHED_PROC_NR, "sched" },
 {VFS_PROC_NR,   "vfs"   },
@@ -64,4 +66,3 @@ struct boot_image image[NR_BOOT_PROCS] = {
 {PFS_PROC_NR,   "pfs"   },
 {INIT_PROC_NR,  "init"  },
 };
-

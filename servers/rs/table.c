@@ -19,6 +19,7 @@ struct boot_image_priv boot_image_priv_table[] = {
 {PM_PROC_NR,   "pm",     SRV_F  },
 {SCHED_PROC_NR,"sched",  SRV_F  },
 {VFS_PROC_NR,  "vfs",    SRV_F  },
+{SS_PROC_NR,   "ss",     SRV_F  }, /* Michael Melatti */
 {DS_PROC_NR,   "ds",     SRV_F  },
 {TTY_PROC_NR,  "tty",    SRV_F  },
 {MEM_PROC_NR,  "memory", SRV_F  },
@@ -53,4 +54,3 @@ struct boot_image_dev boot_image_dev_table[] = {
                                                                       * entry
                                                                       */
 };
-
